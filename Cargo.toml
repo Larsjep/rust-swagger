@@ -1,0 +1,25 @@
+[package]
+name = "rust_swagger"
+version = "0.1.0"
+authors = ["Graham Esau <gesau@hotmail.co.uk>"]
+edition = "2018"
+
+[dependencies.rocket_okapi]
+version = "=0.8.0-rc.2"
+features = ["swagger"]
+optional = true
+
+[dependencies]
+rocket = { version = "=0.5.0-rc.2", default-features = false, features = ["json"] }
+# rocket_okapi = { version = "=0.8.0-rc.2", features = ["swagger", "rapidoc"] }
+serde = "1.0"
+cfg-if = "1.0.0"
+
+[features]
+simulator = ["rocket_okapi"]
+
+[profile.release]
+strip = "symbols"  # Automatically strip symbols from the binary.
+opt-level = "z"  # Optimize for size.
+lto = true
+codegen-units = 1
